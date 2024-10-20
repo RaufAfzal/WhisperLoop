@@ -17,6 +17,7 @@ export async function GET(request: Request) {
         const queryParam = {
             username: searchParams.get('username')
         }
+        console.log(queryParam)
         //validate with zod
         const result = UsernameQuerySchema.safeParse(queryParam)
         console.log('Result is', result)
@@ -25,7 +26,7 @@ export async function GET(request: Request) {
             console.log("username1", usernameErrors)
             return Response.json({
                 success: false,
-                message: "Invalid query parameters"
+                message: "Please enter at least 4 characters"
             }, { status: 400 })
         }
         const { username } = result.data
@@ -41,7 +42,7 @@ export async function GET(request: Request) {
         return Response.json({
             success: true,
             message: "Username is available"
-        }, { status: 400 })
+        }, { status: 200 })
 
     } catch (err) {
         console.error("Error checking username", err)

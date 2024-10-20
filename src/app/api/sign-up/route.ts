@@ -23,7 +23,8 @@ export async function POST(request: Request) {
         }
 
         const existingUserByEmail = await UserModel.findOne({
-            email
+            email,
+            isVerified: true
         })
 
         if (existingUserByEmail) {
